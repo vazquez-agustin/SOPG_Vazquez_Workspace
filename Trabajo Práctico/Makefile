@@ -1,5 +1,5 @@
 # Nombre del ejecutable final
-TARGET = tcpServer
+TARGET = server
 
 # Directorios
 SRC_DIR = src
@@ -12,18 +12,18 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
 # Compilador y flags
 CC = gcc
-CFLAGS = -Wall -I$(INCLUDE_DIR)
+CFLAGS = -Wall -std=c99 -pedantic -I$(INCLUDE_DIR)
 
 # Regla para compilar el ejecutable final
 $(BUILD_DIR)/$(TARGET): $(OBJ_FILES)
 	@mkdir -p $(BUILD_DIR)
 	$(CC) -o $@ $^
-	@echo "Ejecutable $@ creado."
+	@echo "Executable $@ created."
 
 # Regla para compilar cada archivo .c a .o
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
-	@echo "Compilado $< a $@"
+	@echo "Compiled $< to $@"
 
 # Crear el directorio de build si no existe
 $(BUILD_DIR):
@@ -32,11 +32,11 @@ $(BUILD_DIR):
 # Limpieza de archivos compilados
 clean:
 	rm -rf $(BUILD_DIR)/*
-	@echo "Archivos en $(BUILD_DIR) eliminados."
+	@echo "Archives in $(BUILD_DIR) deleted."
 
 # Ejecución del programa
 run: $(BUILD_DIR)/$(TARGET)
-	@echo "Ejecutando $<..."
+	@echo "Executing $<..."
 	@./$(BUILD_DIR)/$(TARGET)
 
 # PHONY para evitar conflictos con archivos llamados igual
