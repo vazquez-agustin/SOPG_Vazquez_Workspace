@@ -1,10 +1,11 @@
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef FILE_H
+#define FILE_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include <errno.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -14,10 +15,9 @@
 #include <fcntl.h>
 #include <stdarg.h>
 
-#define PORT              5000
+#define BUFFER_SIZE       256
+#define RESPONSE_SIZE     256
 
-void handle_client(int client_socket);
-int setTCPServerSocket(int port);
+void cmmdExecution(int client_socket, char* buffer);
 
-#endif // SERVER_H
-
+#endif // FILE_H

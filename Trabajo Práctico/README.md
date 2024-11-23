@@ -1,5 +1,5 @@
 # Alumno
-i0616 Roberto Oscar Axt
+e2301 Agustín Jesús Vazquez
 
 # Enunciado Trabajo práctico
 ## Objetivo
@@ -17,13 +17,13 @@ El servidor debe:
 
 Los comandos que acepta el servidor son:
 
-* SET <clave> <valor>\n:
-  * Se crea en el servidor un archivo llamado <clave> con el contenido indicado en <valor> (sin incluir el \n).
+* SET &lt;clave&gt; &lt;valor&gt;\n:
+  * Se crea en el servidor un archivo llamado &lt;clave&gt; con el contenido indicado en &lt;valor&gt; (sin incluir el \n).
   * Se responde al cliente OK\n.
-* GET <clave>:
-  * Si existe el archivo correspondiente, se responde al cliente con: OK\n<valor>\n (es decir, una línea de texto que dice OK y otra que contiene el contenido del archivo).
+* GET &lt;clave&gt;:
+  * Si existe el archivo correspondiente, se responde al cliente con: OK\n&lt;valor&gt;\n (es decir, una línea de texto que dice OK y otra que contiene el contenido del archivo).
  * Si no existe, se responde con NOTFOUND\n
-* DEL <clave>:
+* DEL &lt;clave&gt;:
   * Si existe la el archivo correspondiente, se elimina.
   * Tanto si existe como no, se responde OK\n.
 Ante cualquier caso excepcional, informar la causa y finalizar el proceso con código de error.
@@ -67,36 +67,3 @@ $
 # Proyecto TCP Server
 
 Este proyecto presenta un servidor TCP básico implementado en C, organizado por directorios para facilitar la gestión del código.
-
-## Estructura del Proyecto
-```
-TP_Final/
-├── src/            # Archivos fuente (.c)
-├── inc/            # Archivos de encabezado (.h)
-├── bin/            # Ejecutables generados
-├── Makefile        # Archivo de construcción
-└── README.md       # Este archivo
-```
-## Compilación
-
-Para compilar el proyecto, asegúrate de tener instalado `gcc` y `make`. Luego, simplemente ejecuta el siguiente comando en la terminal dentro de la carpeta del proyecto:
-
-```bash
-make
-```
-
-## Ejecución
-
-Una vez que el proyecto está compilado, puedes ejecutar el servidor con el siguiente comando:
-
-```bash
-make run
-```
-
-## Limpieza de Archivos
-
-Si deseas limpiar los archivos compilados y eliminar el contenido del directorio de construcción (bin), ejecuta:
-
-```bash
-make clean
-```

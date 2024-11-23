@@ -1,6 +1,5 @@
 #include "server.h"
-
-#define DELIMS " \n"
+#include "file.h"
 
 void handle_client(int client_socket) {
 
@@ -16,64 +15,9 @@ void handle_client(int client_socket) {
     }
 
     buffer[read_size] = '\0';
-
-    char *command = strtok(buffer, DELIMS);
-    char *key = strtok(NULL, DELIMS);
-    char *value = strtok(NULL, DELIMS);
-
-    if (strcmp(command, "SET") == 0 && key && value) {
-        
-        int file = open(key, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-        if (file < 0) {
-            
-            perror("ERROR opening file");
-            write(client_socket, "ERROR\n", 6);
-                       
-        } else {
-        
-            write(file, value, strlen(value));
-            close(file);
-            write(client_socket, "OK\n", 3);
-            
-        }
-        
-    } else if (strcmp(command, "GET") == 0 && key) {
-        
-        int file = open(key, O_RDONLY);
-        if (file < 0) {
-        
-            write(client_socket, "NOTFOUND\n", 9);
-            
-        } else {
-	    
-	    char file_content[BUFFER_SIZE];
-            read(file, file_content, BUFFER_SIZE);
-            close(file);
-
-            write(client_socket, "OK\n", 3);
-            write(client_socket, file_content, strlen(file_content));
-            write(client_socket, "\n", 1);
-	            
-        }
-
-        
-    } else if (strcmp(command, "DEL") == 0 && key) {
-     
-        if (remove(key) == 0) {
-        
-            write(client_socket, "OK\n", 3);
-            
-        } else {
-        
-            write(client_socket, "OK\n", 3);
-            
-        }
-        
-    } else {
-        
-        write(client_socket, "ERROR: Invalid command\n", 23);
-    }
-
+    
+    cmmdExecution(client_socket, buffer);
+    
     close(client_socket);
     
 }
